@@ -3,6 +3,8 @@ import cors from 'cors';
 import pino from 'pino-http';
 import { env } from './utils/env.js';
 import router from './routers/index.js';
+import { notFoundHandler } from './middlewares/notFoundHandler.js';
+import { errorHandler } from './middlewares/errorHandler.js';
 
 const PORT = Number(env('PORT', '3000'));
 
@@ -18,6 +20,9 @@ export const setupServer = () => {
       },
     }),
   );
+  app.use('*', notFoundHandler);
+
+  app.use(errorHandler);
   app.use(router);
 
   app.listen(PORT, () => {
