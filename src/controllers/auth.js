@@ -21,7 +21,7 @@ export const registerUserController = async (req, res) => {
 };
 
 export const loginUserController = async (req, res) => {
-  const session = await loginUser(req.body);
+  const { session, user } = await loginUser(req.body);
 
   setupCookies(res, session);
 
@@ -29,6 +29,7 @@ export const loginUserController = async (req, res) => {
     status: OK,
     message: 'Successfully logged in a user!',
     data: {
+      user,
       accessToken: session.accessToken,
     },
   });
