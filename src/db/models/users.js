@@ -20,7 +20,7 @@ const usersSchema = new Schema(
 
     weight: {
       type: Number,
-      default: 60,
+      default: null,
     },
 
     activityLevel: {
