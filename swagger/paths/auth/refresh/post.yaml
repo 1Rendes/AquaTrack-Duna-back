@@ -1,0 +1,38 @@
+tags:
+  - Authorization
+summary: Refresh session
+operationId: refreshSession
+description: Refresh session for current user
+security: []
+responses:
+  '200':
+    description: Successfully logged in an user!!
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully registered a user!
+            data:
+              type: object
+              required:
+                - accessToken
+                - user
+              properties:
+                accessToken:
+                  type: string
+                  example: 6U7spnH2fzgvZsPM6Rjm6UPhUZ2Wbk6RIks7XfT0
+                user:
+                  $ref: ../../../components/schemas/user.yaml
+
+  '404':
+    $ref: '../../../components/responses/404.yaml'

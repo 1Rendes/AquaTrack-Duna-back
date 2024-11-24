@@ -1,0 +1,27 @@
+type: object
+required:
+  - amount
+  - time
+  - percentage
+  - userId
+properties:
+  _id:
+    description: 'Id of water portion'
+    type: string
+    example: 674340b9d687f43970852f8f
+  amount:
+    description: 'Amount of a water portion'
+    type: integer
+    example: 250
+  time:
+    description: 'Time of drinking'
+    type: string
+    example: '2024-11-24 07:00:00'
+  percentage:
+    description: 'Part in daily norm, percentage'
+    type: integer
+    example: 20
+  userId:
+    description: 'Id of user who drinks'
+    type: string
+    example: 664ca67erae7f10c88b598y

@@ -1,0 +1,11 @@
+tags:
+  - Authorization
+summary: Logout current user
+operationId: logoutUser
+description: Logging out current user
+security: []
+responses:
+  '204':
+    description: Logging out current user
+  '404':
+    $ref: '../../../components/responses/404.yaml'
