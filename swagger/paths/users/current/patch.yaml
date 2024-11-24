@@ -1,0 +1,72 @@
+tags:
+  - Users
+summary: Patch current User
+operationId: patchUser
+description: Patch current User
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        properties:
+          name:
+            description: "Contact's name"
+            type: string
+            example: 'John Doe'
+          phoneNumber:
+            description: "Contact's number"
+            type: number
+            example: 123123123
+          contactType:
+            description: "Contact's type"
+            type: string
+            enum: ['work', 'home', 'personal']
+          email:
+            description: "Contact's email"
+            type: string
+          weight:
+            description: "User's weight"
+            type: number
+            example: 50
+          activityLevel:
+            description: "Level of user's activity"
+            type: number
+            example: 1
+          gender:
+            description: User's gender
+            type: string
+            enum: ['male', 'female']
+            example: female
+          dailyRequirement:
+            description: User's daily value of water to drink, ml
+            type: number
+            example: 1500
+          photo:
+            description: "Link to user's photo"
+            type: string
+            example: https://res.cloudinary.com/dsp7xc3fh/image/upload/v1730624509/kzkhsbcokzfcxanrr4hf.png
+responses:
+  '200':
+    description: Patches current user
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully patched a user!
+            data:
+              type: object
+              $ref: ../../../components/schemas/user.yaml
+  '404':
+    $ref: '../../../components/responses/404.yaml'

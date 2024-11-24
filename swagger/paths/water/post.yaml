@@ -1,0 +1,52 @@
+tags:
+  - Water
+summary: Add Water
+operationId: addWater
+description: 'Create a note about portion of water'
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - amount
+          - time
+          - percentage
+        properties:
+          amount:
+            description: 'Amount of a water portion'
+            type: integer
+            example: 250
+          time:
+            description: 'Time of drinking'
+            type: string
+            example: '2024-11-24 07:00:00'
+          percentage:
+            description: 'Part in daily norm, percentage'
+            type: integer
+            example: 20
+responses:
+  '201':
+    description: Creates a water
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Water added successfully
+            data:
+              type: object
+              $ref: ../../components/schemas/water.yaml
+  '404':
+    $ref: '../../components/responses/404.yaml'
