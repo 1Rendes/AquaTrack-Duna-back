@@ -26,9 +26,13 @@ responses:
               type: object
               required:
                 - accessToken
+                - user
               properties:
                 accessToken:
                   type: string
                   example: 6U7spnH2fzgvZsPM6Rjm6UPhUZ2Wbk6RIks7XfT0
+                user:
+                  $ref: ../../../components/schemas/user.yaml
+
   '404':
     $ref: '../../../components/responses/404.yaml'

@@ -12,19 +12,11 @@ requestBody:
         type: object
         properties:
           name:
-            description: "Contact's name"
+            description: "User's name"
             type: string
             example: 'John Doe'
-          phoneNumber:
-            description: "Contact's number"
-            type: number
-            example: 123123123
-          contactType:
-            description: "Contact's type"
-            type: string
-            enum: ['work', 'home', 'personal']
           email:
-            description: "Contact's email"
+            description: "User's email"
             type: string
           weight:
             description: "User's weight"
@@ -44,9 +36,9 @@ requestBody:
             type: number
             example: 1500
           photo:
-            description: "Link to user's photo"
+            description: 'User photo'
             type: string
-            example: https://res.cloudinary.com/dsp7xc3fh/image/upload/v1730624509/kzkhsbcokzfcxanrr4hf.png
+            format: binary
 responses:
   '200':
     description: Patches current user

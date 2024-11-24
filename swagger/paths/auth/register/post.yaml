@@ -10,12 +10,9 @@ requestBody:
       schema:
         type: object
         required:
-          - name
           - email
           - password
         properties:
-          name:
-            type: string
           email:
             type: string
           password:
@@ -39,21 +36,6 @@ responses:
               type: string
               example: Successfully registered a user!
             data:
-              type: object
-              required:
-                - name
-                - email
-              properties:
-                name:
-                  type: string
-                email:
-                  type: string
-                _id:
-                  type: string
-                createdAt:
-                  type: string
-                  example: 2024-11-11T10:47:18.573Z
-                updatedAt:
-                  type: string
+              $ref: ../../../components/schemas/user.yaml
   '400':
     $ref: '../../../components/responses/400.yaml'
