@@ -11,7 +11,7 @@ export const addWaterSchema = Joi.object({
   time: Joi.string().pattern(isoDateTimePattern).required().messages({
     'string.base': 'The time must be a string.',
     'string.pattern.base':
-      'The time must follow the ISO format (YYYY-MM-DDThh:mm:ss).',
+      'The time must follow the ISO format (YYYY-MM-DD hh:mm:ss).',
     'any.required': 'The time is required.',
   }),
   percentage: Joi.number().min(0).max(100).required().messages({
