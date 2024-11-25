@@ -34,13 +34,13 @@ export const getDailyWater = (userId, date) => {
 };
 
 export const getMonthlyWater = async (userId, yearMonth) => {
-  const startOfMonth = new Date(`${yearMonth}-01T00:00:00`).toISOString();
-  const endOfMonth = new Date(`${yearMonth}-31T23:59:59`).toISOString();
+  const startOfMonth = new Date(`${yearMonth}-01T00:00:00`);
+  const endOfMonth = new Date(`${yearMonth}-31T23:59:59`);
   const waterRecords = await WaterCollection.find({
     userId,
     time: {
-      $gte: startOfMonth,
-      $lte: endOfMonth,
+      $gte: startOfMonth.toISOString(),
+      $lte: endOfMonth.toISOString(),
     },
   }).sort({ time: 1 });
 
