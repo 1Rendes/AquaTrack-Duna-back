@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-const isoDateTimePattern = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/;
+const isoDateTimePattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/;
 
 export const addWaterSchema = Joi.object({
   amount: Joi.number().required().messages({
@@ -11,7 +11,7 @@ export const addWaterSchema = Joi.object({
   time: Joi.string().pattern(isoDateTimePattern).required().messages({
     'string.base': 'The time must be a string.',
     'string.pattern.base':
-      'The time must follow the ISO format (YYYY-MM-DD hh:mm:ss).',
+      'The time must follow the ISO format (YYYY-MM-DDThh:mm:ss).',
     'any.required': 'The time is required.',
   }),
   percentage: Joi.number().min(0).max(100).required().messages({
@@ -48,7 +48,8 @@ export const dateSchema = Joi.object({
     .pattern(/^\d{4}-\d{2}-\d{2}$/)
     .required()
     .messages({
-      'string.pattern.base': 'The date must be in the format YYYY-MM-DD.',
+      'string.pattern.base':
+        'The dynamic parameter which corresponds to date must be in the format YYYY-MM-DD.',
       'any.required': 'The date is required.',
     }),
 });
@@ -58,7 +59,8 @@ export const monthSchema = Joi.object({
     .pattern(/^\d{4}-\d{2}$/)
     .required()
     .messages({
-      'string.pattern.base': 'The month must be in the format YYYY-MM.',
+      'string.pattern.base':
+        'The dynamic parameter which corresponds to month must be in the format YYYY-MM.',
       'any.required': 'The month is required.',
     }),
 });
