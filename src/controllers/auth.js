@@ -25,7 +25,7 @@ export const loginUserController = async (req, res) => {
 
   setupCookies(res, session);
 
-  res.json({
+  res.status(OK).json({
     status: OK,
     message: 'Successfully logged in a user!',
     data: {
@@ -51,7 +51,7 @@ export const refreshUserSessionController = async (req, res) => {
 
   setupCookies(res, session);
 
-  res.json({
+  res.status(OK).json({
     status: OK,
     message: 'Successfully refreshed a session!',
     data: {

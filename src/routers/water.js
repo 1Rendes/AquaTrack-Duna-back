@@ -1,14 +1,22 @@
 import { Router } from 'express';
 import express from 'express';
 import { validateBody } from '../middlewares/validateBody.js';
-import { addWaterSchema, updateWaterSchema } from '../validation/water.js';
+import {
+  addWaterSchema,
+  dateSchema,
+  monthSchema,
+  updateWaterSchema,
+} from '../validation/water.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { isValidId } from '../middlewares/isValidId.js';
 import {
   addWaterController,
   deleteWaterController,
+  getDailyWaterController,
+  getMonthlyWaterController,
   updateWaterController,
 } from '../controllers/water.js';
+import { validateParams } from '../middlewares/validateParams.js';
 
 const router = Router();
 const jsonParser = express.json();
@@ -33,7 +41,16 @@ router.delete(
   isValidId('waterId'),
   ctrlWrapper(deleteWaterController),
 );
+router.get(
+  '/day/:date',
+  validateParams(dateSchema),
+  ctrlWrapper(getDailyWaterController),
+);
 
-//Ще мають бути 2 роути для отримання масиву порцій за день і за місяць
+router.get(
+  '/month/:yearMonth',
+  validateParams(monthSchema),
+  ctrlWrapper(getMonthlyWaterController),
+);
 
 export default router;

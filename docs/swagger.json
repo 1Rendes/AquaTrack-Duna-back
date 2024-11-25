@@ -33,14 +33,10 @@
               "schema": {
                 "type": "object",
                 "required": [
-                  "name",
                   "email",
                   "password"
                 ],
                 "properties": {
-                  "name": {
-                    "type": "string"
-                  },
                   "email": {
                     "type": "string"
                   },
@@ -74,29 +70,7 @@
                       "example": "Successfully registered a user!"
                     },
                     "data": {
-                      "type": "object",
-                      "required": [
-                        "name",
-                        "email"
-                      ],
-                      "properties": {
-                        "name": {
-                          "type": "string"
-                        },
-                        "email": {
-                          "type": "string"
-                        },
-                        "_id": {
-                          "type": "string"
-                        },
-                        "createdAt": {
-                          "type": "string",
-                          "example": "2024-11-11T10:47:18.573Z"
-                        },
-                        "updatedAt": {
-                          "type": "string"
-                        }
-                      }
+                      "$ref": "#/components/schemas/user"
                     }
                   }
                 }
@@ -141,7 +115,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successfully logged in an user!!",
+            "description": "Successfully logged in a user!",
             "content": {
               "application/json": {
                 "schema": {
@@ -158,17 +132,21 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Successfully registered a user!"
+                      "example": "Successfully logged in a user!"
                     },
                     "data": {
                       "type": "object",
                       "required": [
-                        "accessToken"
+                        "accessToken",
+                        "user"
                       ],
                       "properties": {
                         "accessToken": {
                           "type": "string",
                           "example": "6U7spnH2fzgvZsPM6Rjm6UPhUZ2Wbk6RIks7XfT0"
+                        },
+                        "user": {
+                          "$ref": "#/components/schemas/user"
                         }
                       }
                     }
@@ -216,12 +194,16 @@
                     "data": {
                       "type": "object",
                       "required": [
-                        "accessToken"
+                        "accessToken",
+                        "user"
                       ],
                       "properties": {
                         "accessToken": {
                           "type": "string",
                           "example": "6U7spnH2fzgvZsPM6Rjm6UPhUZ2Wbk6RIks7XfT0"
+                        },
+                        "user": {
+                          "$ref": "#/components/schemas/user"
                         }
                       }
                     }
@@ -322,26 +304,12 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "description": "Contact's name",
+                    "description": "User's name",
                     "type": "string",
                     "example": "John Doe"
                   },
-                  "phoneNumber": {
-                    "description": "Contact's number",
-                    "type": "number",
-                    "example": 123123123
-                  },
-                  "contactType": {
-                    "description": "Contact's type",
-                    "type": "string",
-                    "enum": [
-                      "work",
-                      "home",
-                      "personal"
-                    ]
-                  },
                   "email": {
-                    "description": "Contact's email",
+                    "description": "User's email",
                     "type": "string"
                   },
                   "weight": {
@@ -369,9 +337,9 @@
                     "example": 1500
                   },
                   "photo": {
-                    "description": "Link to user's photo",
+                    "description": "User photo",
                     "type": "string",
-                    "example": "https://res.cloudinary.com/dsp7xc3fh/image/upload/v1730624509/kzkhsbcokzfcxanrr4hf.png"
+                    "format": "binary"
                   }
                 }
               }
@@ -442,6 +410,9 @@
           "204": {
             "description": "Delete water portion by id"
           },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
           "404": {
             "$ref": "#/components/responses/404"
           }
@@ -484,7 +455,7 @@
                   "time": {
                     "description": "Time of drinking",
                     "type": "string",
-                    "example": "2024-11-24 07:00:00"
+                    "example": "2024-11-24T07:00:00"
                   },
                   "percentage": {
                     "description": "Part in daily norm, percentage",
@@ -526,6 +497,9 @@
               }
             }
           },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
           "404": {
             "$ref": "#/components/responses/404"
           }
@@ -564,7 +538,7 @@
                   "time": {
                     "description": "Time of drinking",
                     "type": "string",
-                    "example": "2024-11-24 07:00:00"
+                    "example": "2024-11-24T07:00:00"
                   },
                   "percentage": {
                     "description": "Part in daily norm, percentage",
@@ -606,6 +580,9 @@
               }
             }
           },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
           "404": {
             "$ref": "#/components/responses/404"
           }
@@ -618,118 +595,6 @@
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer"
-      }
-    },
-    "responses": {
-      "400": {
-        "description": "Bad Request",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "required": [
-                "status",
-                "message",
-                "error"
-              ],
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 400
-                },
-                "message": {
-                  "type": "string",
-                  "example": "BadRequestError"
-                },
-                "error": {
-                  "type": "object",
-                  "required": [
-                    "message",
-                    "errors"
-                  ],
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Bad Request"
-                    },
-                    "errors": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "message": {
-                            "type": "string",
-                            "example": "\"password\" is required"
-                          },
-                          "path": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          },
-                          "type": {
-                            "type": "string",
-                            "example": "any.required"
-                          },
-                          "context": {
-                            "type": "object",
-                            "properties": {
-                              "label": {
-                                "type": "string",
-                                "example": "password"
-                              },
-                              "key": {
-                                "type": "string",
-                                "example": "password"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "404": {
-        "description": "Not found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "required": [
-                "status",
-                "message",
-                "error"
-              ],
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 404
-                },
-                "message": {
-                  "type": "string",
-                  "example": "NotFoundError"
-                },
-                "error": {
-                  "type": "object",
-                  "required": [
-                    "message"
-                  ],
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "User not found"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
       }
     },
     "schemas": {
@@ -825,6 +690,155 @@
             "description": "Id of user who drinks",
             "type": "string",
             "example": "664ca67erae7f10c88b598y"
+          }
+        }
+      }
+    },
+    "responses": {
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "error"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "BadRequestError"
+                },
+                "error": {
+                  "type": "object",
+                  "required": [
+                    "message",
+                    "errors"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Bad Request"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "\"password\" is required"
+                          },
+                          "path": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "any.required"
+                          },
+                          "context": {
+                            "type": "object",
+                            "properties": {
+                              "label": {
+                                "type": "string",
+                                "example": "password"
+                              },
+                              "key": {
+                                "type": "string",
+                                "example": "password"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "UnauthorizedError"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Token is expired or invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "error"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 404
+                },
+                "message": {
+                  "type": "string",
+                  "example": "NotFoundError"
+                },
+                "error": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "User not found"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
