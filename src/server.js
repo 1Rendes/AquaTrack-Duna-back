@@ -13,9 +13,20 @@ const PORT = Number(env('PORT', '3000'));
 export const setupServer = () => {
   const app = express();
 
+  const allowedOrigins = [
+    'http://localhost:5173',
+    'aqua-track-duna-front.vercel.app',
+  ];
+
   app.use(
     cors({
-      origin: 'aqua-track-duna-front.vercel.app',
+      origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
+      },
       credentials: true,
     }),
   );
