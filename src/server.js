@@ -13,7 +13,12 @@ const PORT = Number(env('PORT', '3000'));
 export const setupServer = () => {
   const app = express();
 
-  app.use(cors());
+  app.use(
+    cors({
+      origin: 'aqua-track-duna-front.vercel.app',
+      credentials: true,
+    }),
+  );
   app.use(cookieParser());
 
   app.use(
