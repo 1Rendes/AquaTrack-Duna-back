@@ -22,7 +22,7 @@ requestBody:
           time:
             description: 'Time of drinking'
             type: string
-            example: '2024-11-24 07:00:00'
+            example: '2024-11-24T07:00:00'
           percentage:
             description: 'Part in daily norm, percentage'
             type: integer
