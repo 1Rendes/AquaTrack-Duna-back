@@ -33,22 +33,25 @@ export const getDailyWater = (userId, date) => {
   });
 };
 
+import { format } from 'date-fns';
+
 export const getMonthlyWater = async (userId, yearMonth) => {
-  const startOfMonth = new Date(`${yearMonth}-01T00:00:00`).toISOString();
-  const endOfMonth = new Date(`${yearMonth}-31T23:59:59`).toISOString();
+  const startOfMonth = new Date(`${yearMonth}-01T00:00:00`);
+  const endOfMonth = new Date(`${yearMonth}-31T23:59:59`);
   const waterRecords = await WaterCollection.find({
     userId,
     time: {
-      $gte: startOfMonth,
-      $lte: endOfMonth,
+      $gte: startOfMonth.toISOString(),
+      $lte: endOfMonth.toISOString(),
     },
   }).sort({ time: 1 });
 
   const dailyPercentages = {};
 
   waterRecords.forEach((record) => {
-    const day = new Date(record.time).getDate();
-    dailyPercentages[day] = record.percentage;
+    const date = new Date(record.time);
+    const formattedDay = format(date, 'yyyy-MM-dd');
+    dailyPercentages[formattedDay] = record.percentage;
   });
 
   const daysInMonth = new Date(
@@ -56,10 +59,18 @@ export const getMonthlyWater = async (userId, yearMonth) => {
     startOfMonth.getMonth() + 1,
     0,
   ).getDate();
-  const result = Array.from({ length: daysInMonth }, (_, i) => ({
-    day: i + 1,
-    percentage: dailyPercentages[i + 1] || 0,
-  }));
+
+  const result = Array.from({ length: daysInMonth }, (_, i) => {
+    const formattedDay = format(
+      new Date(startOfMonth.getFullYear(), startOfMonth.getMonth(), i + 1),
+      'yyyy-MM-dd',
+    );
+
+    return {
+      day: formattedDay,
+      percentage: dailyPercentages[formattedDay] || 0,
+    };
+  });
 
   return result;
 };
