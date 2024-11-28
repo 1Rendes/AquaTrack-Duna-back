@@ -15,7 +15,7 @@ export const setupServer = () => {
 
   const allowedOrigins = [
     'http://localhost:5173',
-    'aqua-track-duna-front.vercel.app',
+    'http://aqua-track-duna-front.vercel.app',
   ];
 
   app.use(
