@@ -15,18 +15,12 @@ export const setupServer = () => {
 
   const allowedOrigins = [
     'http://localhost:5173',
-    'http://aqua-track-duna-front.vercel.app',
+    'https://aqua-track-duna-front.vercel.app',
   ];
 
   app.use(
     cors({
-      origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
-          callback(null, true);
-        } else {
-          callback(new Error('Not allowed by CORS'));
-        }
-      },
+      origin: allowedOrigins,
       credentials: true,
     }),
   );
