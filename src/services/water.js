@@ -12,10 +12,7 @@ export const updateWater = async (waterId, userId, payload, options = {}) => {
     { new: true, includeResultMetadata: true, ...options },
   );
 
-  return {
-    data: water.value,
-    isNew: Boolean(water?.lastErrorObject?.upserted),
-  };
+  return water.value;
 };
 
 export const deleteWater = (waterId, userId) =>
