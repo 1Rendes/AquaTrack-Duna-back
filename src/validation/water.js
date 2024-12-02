@@ -3,10 +3,11 @@ import Joi from 'joi';
 const isoDateTimePattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/;
 
 export const addWaterSchema = Joi.object({
-  amount: Joi.number().integer().min(50).required().messages({
+  amount: Joi.number().integer().min(50).max(5000).required().messages({
     'number.base': 'The amount must be a valid number.',
     'number.integer': 'The amount must be an integer.',
     'number.min': 'The amount cannot be less than 50.',
+    'number.max': 'The amount cannot be more than 5000.',
     'any.required': 'The amount is required.',
   }),
 
@@ -26,10 +27,11 @@ export const addWaterSchema = Joi.object({
 });
 
 export const updateWaterSchema = Joi.object({
-  amount: Joi.number().integer().min(50).messages({
+  amount: Joi.number().integer().min(50).max(5000).messages({
     'number.base': 'The amount must be a valid number.',
     'number.integer': 'The amount must be an integer.',
     'number.min': 'The amount cannot be less than 50.',
+    'number.max': 'The amount cannot be more than 5000.',
   }),
 
   time: Joi.string().pattern(isoDateTimePattern).messages({
