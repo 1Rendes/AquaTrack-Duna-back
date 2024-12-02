@@ -15,23 +15,32 @@ export const updateUserSchema = Joi.object({
     'string.empty': 'Name cannot be empty.',
     'string.min': 'Name must be at least 3 characters long.',
     'string.max': 'Name must not exceed 20 characters.',
+    'string.base': 'Name must be a valid string.',
   }),
   email: Joi.string().email().messages({
     'string.empty': 'Email cannot be empty.',
     'string.email': 'Email must be a valid email address.',
+    'string.base': 'Email must be a valid string.',
   }),
-  weight: Joi.number().messages({
+  weight: Joi.number().min(0).max(500).messages({
     'number.base': 'Weight must be a valid number.',
+    'number.min': 'Weight must be at least 0.',
+    'number.max': 'Weight must not exceed 500.',
   }),
-  activityLevel: Joi.number().messages({
+  activityLevel: Joi.number().min(0).max(24).messages({
     'number.base': 'Activity level must be a valid number.',
+    'number.min': 'Activity level cannot be negative.',
+    'number.max': 'Activity level cannot be more than.',
   }),
   gender: Joi.string().valid('male', 'female').messages({
     'string.empty': 'Gender cannot be empty.',
     'any.only': 'Gender must be either "male" or "female".',
+    'string.base': 'Gender must be a valid string.',
   }),
-  dailyRequirement: Joi.number().integer().messages({
+  dailyRequirement: Joi.number().integer().min(200).max(15000).messages({
     'number.base': 'Daily requirement must be a valid number.',
     'number.integer': 'Daily requirement must be an integer.',
+    'number.min': 'Daily requirement must be at least 200.',
+    'number.max': "Daily requirement musn't be more that 15000.",
   }),
 });

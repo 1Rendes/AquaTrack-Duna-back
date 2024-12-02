@@ -3,40 +3,47 @@ import Joi from 'joi';
 const isoDateTimePattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/;
 
 export const addWaterSchema = Joi.object({
-  amount: Joi.number().required().messages({
-    'number.base': 'The amount must be a number.',
+  amount: Joi.number().integer().min(50).max(5000).required().messages({
+    'number.base': 'The amount must be a valid number.',
+    'number.integer': 'The amount must be an integer.',
+    'number.min': 'The amount cannot be less than 50.',
+    'number.max': 'The amount cannot be more than 5000.',
     'any.required': 'The amount is required.',
   }),
 
   time: Joi.string().pattern(isoDateTimePattern).required().messages({
-    'string.base': 'The time must be a string.',
+    'string.base': 'The time must be a valid string.',
     'string.pattern.base':
       'The time must follow the ISO format (YYYY-MM-DDThh:mm:ss).',
     'any.required': 'The time is required.',
   }),
-  percentage: Joi.number().min(0).max(100).required().messages({
-    'number.base': 'The percentage must be a number.',
-    'number.min': 'The percentage must be at least 0.',
-    'number.max': 'The percentage cannot be more than 100.',
+  percentage: Joi.number().integer().min(0).max(100).required().messages({
+    'number.base': 'The percentage must be a valid number.',
+    'number.integer': 'The percentage must be an integer.',
+    'number.min': 'The percentage cannot be less than 0.',
+    'number.max': 'The percentage cannot be greater than 100.',
     'any.required': 'The percentage is required.',
   }),
 });
 
 export const updateWaterSchema = Joi.object({
-  amount: Joi.number().messages({
-    'number.base': 'The amount must be a number.',
+  amount: Joi.number().integer().min(50).max(5000).messages({
+    'number.base': 'The amount must be a valid number.',
+    'number.integer': 'The amount must be an integer.',
+    'number.min': 'The amount cannot be less than 50.',
+    'number.max': 'The amount cannot be more than 5000.',
   }),
 
   time: Joi.string().pattern(isoDateTimePattern).messages({
-    'string.base': 'The time must be a string.',
+    'string.base': 'The time must be a valid string.',
     'string.pattern.base':
       'The time must follow the ISO format (YYYY-MM-DDThh:mm:ss).',
   }),
-  percentage: Joi.number().min(0).max(100).messages({
-    'number.base': 'The percentage must be a number.',
-    'number.min': 'The percentage must be at least 0.',
-    'number.max': 'The percentage cannot be more than 100.',
-    'any.required': 'The percentage is required.',
+  percentage: Joi.number().integer().min(0).max(100).messages({
+    'number.base': 'The percentage must be a valid number.',
+    'number.integer': 'The percentage must be an integer.',
+    'number.min': 'The percentage cannot be less than 0.',
+    'number.max': 'The percentage cannot be greater than 100.',
   }),
 });
 

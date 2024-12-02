@@ -36,7 +36,7 @@ const usersSchema = new Schema(
 
     dailyRequirement: {
       type: Number,
-      default: 1500,
+      default: 1800,
     },
 
     photo: {
