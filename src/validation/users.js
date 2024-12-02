@@ -35,3 +35,22 @@ export const updateUserSchema = Joi.object({
     'number.integer': 'Daily requirement must be an integer.',
   }),
 });
+
+export const sendResetEmailSchema = Joi.object({
+  email: Joi.string().email().required().messages({
+    'string.base': 'The email must be a valid string.',
+    'string.email': 'The email must be a valid email address.',
+    'any.required': 'The email is required.',
+  }),
+});
+
+export const resetPasswordSchema = Joi.object({
+  password: Joi.string().required().messages({
+    'string.base': 'The password must be a valid string.',
+    'any.required': 'The password is required.',
+  }),
+  token: Joi.string().required().messages({
+    'string.base': 'The token must be a valid string.',
+    'any.required': 'The token is required.',
+  }),
+});
