@@ -11,9 +11,6 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
-    },
-    {
       "url": "https://aquatrack-duna-server.onrender.com"
     }
   ],
@@ -615,26 +612,33 @@
           "name": {
             "description": "User's name",
             "type": "string",
-            "example": "John Doe"
+            "minLength": 3,
+            "maxLength": 20,
+            "example": "John Doe",
+            "nullable": true
           },
           "email": {
             "description": "User's email",
             "type": "string",
-            "example": "user@mail.com"
-          },
-          "password": {
-            "description": "User's password",
-            "type": "string"
+            "format": "email",
+            "example": "user@mail.com",
+            "nullable": true
           },
           "weight": {
-            "description": "User's weight",
+            "description": "User's weight in kilograms",
             "type": "number",
-            "example": 50
+            "minimum": 0,
+            "maximum": 500,
+            "example": 70,
+            "nullable": true
           },
           "activityLevel": {
             "description": "Level of user's activity",
             "type": "number",
-            "example": 1
+            "minimum": 0,
+            "maximum": 24,
+            "example": 3,
+            "nullable": true
           },
           "gender": {
             "description": "User's gender",
@@ -643,12 +647,16 @@
               "male",
               "female"
             ],
-            "example": "female"
+            "example": "female",
+            "nullable": true
           },
           "dailyRequirement": {
-            "description": "User's daily value of water to drink, ml",
-            "type": "number",
-            "example": 1500
+            "description": "User's daily water intake requirement in ml",
+            "type": "integer",
+            "minimum": 200,
+            "maximum": 15000,
+            "example": 1500,
+            "nullable": true
           },
           "photo": {
             "description": "Link to user's photo",
@@ -672,19 +680,24 @@
             "example": "674340b9d687f43970852f8f"
           },
           "amount": {
-            "description": "Amount of a water portion",
+            "description": "Amount of a water portion in milliliters",
             "type": "integer",
+            "minimum": 50,
+            "maximum": 5000,
             "example": 250
           },
           "time": {
-            "description": "Time of drinking",
+            "description": "Time of drinking in ISO 8601 format",
             "type": "string",
-            "example": "2024-11-24 07:00:00"
+            "format": "date-time",
+            "example": "2024-11-24T07:00:00"
           },
           "percentage": {
             "description": "Part in daily norm, percentage",
             "type": "integer",
-            "example": 20
+            "minimum": 0,
+            "maximum": 100,
+            "example": 89
           },
           "userId": {
             "description": "Id of user who drinks",

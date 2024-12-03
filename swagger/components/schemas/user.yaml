@@ -12,31 +12,43 @@ properties:
   name:
     description: "User's name"
     type: string
+    minLength: 3
+    maxLength: 20
     example: 'John Doe'
+    nullable: true
   email:
     description: "User's email"
     type: string
+    format: email
     example: user@mail.com
-  password:
-    description: "User's password"
-    type: string
+    nullable: true
   weight:
-    description: "User's weight"
+    description: "User's weight in kilograms"
     type: number
-    example: 50
+    minimum: 0
+    maximum: 500
+    example: 70
+    nullable: true
   activityLevel:
     description: "Level of user's activity"
     type: number
-    example: 1
+    minimum: 0
+    maximum: 24
+    example: 3
+    nullable: true
   gender:
-    description: User's gender
+    description: "User's gender"
     type: string
     enum: ['male', 'female']
     example: female
+    nullable: true
   dailyRequirement:
-    description: User's daily value of water to drink, ml
-    type: number
+    description: "User's daily water intake requirement in ml"
+    type: integer
+    minimum: 200
+    maximum: 15000
     example: 1500
+    nullable: true
   photo:
     description: "Link to user's photo"
     type: string
