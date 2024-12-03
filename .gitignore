@@ -7,4 +7,5 @@
 .vscode
 .DS_Store
 .idea
-.pullRequests
+
+.pullrequests
