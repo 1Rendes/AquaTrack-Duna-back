@@ -41,7 +41,7 @@ export const updateUserSchema = Joi.object({
     'number.base': 'Daily requirement must be a valid number.',
     'number.integer': 'Daily requirement must be an integer.',
     'number.min': 'Daily requirement must be at least 200.',
-    'number.max': "Daily requirement musn't be more that 000.",
+    'number.max': "Daily requirement musn't be more that 15000.",
   }),
 });
 
