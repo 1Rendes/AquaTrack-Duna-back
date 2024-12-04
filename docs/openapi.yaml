@@ -22,29 +22,31 @@ paths:
   /auth/logout:
     post:
       $ref: ../swagger/paths/auth/logout/post.yaml
-  # /auth/send-reset-email:
-  #   post:
-  #     $ref: ../swagger/paths/auth/send-reset-email/post.yaml
-  # /auth/reset-pwd:
-  #   post:
-  #     $ref: ../swagger/paths/auth/reset-pwd/post.yaml
+  /auth/send-reset-email:
+    post:
+      $ref: ../swagger/paths/auth/send-reset-email/post.yaml
+  /auth/reset-pwd:
+    post:
+      $ref: ../swagger/paths/auth/reset-pwd/post.yaml
   /users/current:
     get:
       $ref: ../swagger/paths/users/current/get.yaml
     patch:
       $ref: ../swagger/paths/users/current/patch.yaml
+  /water:
+    post:
+      $ref: ../swagger/paths/water/post.yaml
   /water/{waterId}:
-    # get:
-    #   $ref: ../swagger/paths/water/{waterId}/get.yaml
     delete:
       $ref: ../swagger/paths/water/{waterId}/delete.yaml
     patch:
       $ref: ../swagger/paths/water/{waterId}/patch.yaml
-  /water:
-    # get:
-    #   $ref: ../swagger/paths/water/get.yaml
-    post:
-      $ref: ../swagger/paths/water/post.yaml
+  /water/day/{date}:
+    get:
+      $ref: ../swagger/paths/water/day/{date}/get.yaml
+  /water/month/{month}:
+    get:
+      $ref: ../swagger/paths/water/month/{month}/get.yaml
 components:
   securitySchemes:
     bearerAuth:

@@ -22,11 +22,11 @@ export const deleteWater = (waterId, userId) =>
   });
 
 export const getDailyWater = (userId, date) => {
-  const startOfDay = new Date(`${date}T00:00:00`).toISOString();
-  const endOfDay = new Date(`${date}T23:59:59`).toISOString();
+  const startOfDay = new Date(date + 'T00:00:00').toISOString();
+  const endOfDay = new Date(date + 'T23:59:59').toISOString();
   return WaterCollection.find({
     userId,
-    time: { $gte: startOfDay, $lte: endOfDay },
+    time: { $gte: startOfDay.toISOString(), $lte: endOfDay.toISOString() },
   });
 };
 

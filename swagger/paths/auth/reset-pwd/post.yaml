@@ -1,44 +1,44 @@
-# tags:
-#   - Authorization
-# summary: Reset password
-# operationId: ResetPassword
-# description: Write a new password to user, that sending correct token and password
-# security: []
-# requestBody:
-#   content:
-#     application/json:
-#       schema:
-#         type: object
-#         required:
-#           - token
-#           - password
-#         properties:
-#           token:
-#             type: string
-#             example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NzI2MmVjYWI3ZjY4OWFjZGQyMGUxOTUiLCJlbWFpbCI6IjFhZG1pbkB1a3IubmV0IiwiaWF0IjoxNzMxMzMxODYzLCJleHAiOjE3MzEzMzIxNjN9.WvjLlAHXWHUY2GLnyK9SnYvaa-BoY3IODs2o4Qi6Anw
-#           password:
-#             type: string
-# responses:
-#   '200':
-#     description: Reset password email has been successfully sent.
-#     content:
-#       application/json:
-#         schema:
-#           type: object
-#           required:
-#             - status
-#             - message
-#             - data
-#           properties:
-#             status:
-#               type: integer
-#               example: 200
-#             message:
-#               type: string
-#               example: Reset password email has been successfully sent.
-#             data:
-#               type: object
-#   '404':
-#     $ref: '../../../components/responses/404.yaml'
-#   '401':
-#     $ref: '../../../components/responses/401.yaml'
+tags:
+  - Authorization
+summary: Reset password
+operationId: ResetPassword
+description: Write a new password to user, that sending correct token and password
+security: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - token
+          - password
+        properties:
+          token:
+            type: string
+            example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NzI2MmVjYWI3ZjY4OWFjZGQyMGUxOTUiLCJlbWFpbCI6IjFhZG1pbkB1a3IubmV0IiwiaWF0IjoxNzMxMzMxODYzLCJleHAiOjE3MzEzMzIxNjN9.WvjLlAHXWHUY2GLnyK9SnYvaa-BoY3IODs2o4Qi6Anw
+          password:
+            type: string
+responses:
+  '200':
+    description: Reset password email has been successfully sent.
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Reset password email has been successfully sent.
+            data:
+              type: object
+  '404':
+    $ref: '../../../components/responses/404.yaml'
+  '401':
+    $ref: '../../../components/responses/401.yaml'

@@ -10,17 +10,22 @@ properties:
     type: string
     example: 674340b9d687f43970852f8f
   amount:
-    description: 'Amount of a water portion'
+    description: 'Amount of a water portion in milliliters'
     type: integer
+    minimum: 50
+    maximum: 5000
     example: 250
   time:
-    description: 'Time of drinking'
+    description: 'Time of drinking in ISO 8601 format'
     type: string
-    example: '2024-11-24 07:00:00'
+    format: date-time
+    example: '2024-11-24T07:00:00'
   percentage:
     description: 'Part in daily norm, percentage'
     type: integer
-    example: 20
+    minimum: 0
+    maximum: 100
+    example: 89
   userId:
     description: 'Id of user who drinks'
     type: string

@@ -1,0 +1,46 @@
+tags:
+  - Water
+summary: Get data on the drunk water for the month
+operationId: getDaysPerMonth
+description: 'Get data on the drunk water for the month'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: month
+    required: true
+    schema:
+      type: string
+      pattern: '/^\d{4}-\d{2}$/'
+      example: '2024-11'
+responses:
+  '200':
+    description: Water by month found successfully
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: 'Water by date 2024-11-04 found successfully!'
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  day:
+                    type: string
+                    example: '2024-11'
+                  percentage:
+                    type: integer
+                    example: 89
+  '401':
+    $ref: '../../../../components/responses/401.yaml'
