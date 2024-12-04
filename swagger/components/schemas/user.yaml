@@ -15,40 +15,34 @@ properties:
     minLength: 3
     maxLength: 20
     example: 'John Doe'
-    nullable: true
   email:
     description: "User's email"
     type: string
     format: email
     example: user@mail.com
-    nullable: true
   weight:
     description: "User's weight in kilograms"
     type: number
     minimum: 0
     maximum: 500
     example: 70
-    nullable: true
   activityLevel:
     description: "Level of user's activity"
     type: number
     minimum: 0
     maximum: 24
     example: 3
-    nullable: true
   gender:
     description: "User's gender"
     type: string
     enum: ['male', 'female']
     example: female
-    nullable: true
   dailyRequirement:
     description: "User's daily water intake requirement in ml"
     type: integer
     minimum: 200
     maximum: 15000
     example: 1500
-    nullable: true
   photo:
     description: "Link to user's photo"
     type: string

@@ -1,15 +1,12 @@
 import createHttpError from 'http-errors';
-import { getCurrentUserData, patchCurrentUserData } from '../services/users.js';
+import { patchCurrentUserData } from '../services/users.js';
 import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 import { HTTP_STATUSES } from '../constants/index.js';
 
 const { OK, NOT_FOUND } = HTTP_STATUSES;
 
 export const getCurrentUserDataController = async (req, res) => {
-  const currentUser = await getCurrentUserData(req.user._id);
-  if (!currentUser) {
-    throw createHttpError(NOT_FOUND, 'User not found');
-  }
+  const currentUser = req.user;
   res.json({
     status: OK,
     message: `Successfully found user with id ${req.user._id}!`,

@@ -237,6 +237,139 @@
         }
       }
     },
+    "/auth/send-reset-email": {
+      "post": {
+        "tags": [
+          "Authorization"
+        ],
+        "summary": "Send reset email",
+        "operationId": "sendResetEmail",
+        "description": "Send an email with link to reset password",
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reset password email has been successfully sent.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Reset password email has been successfully sent."
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/reset-pwd": {
+      "post": {
+        "tags": [
+          "Authorization"
+        ],
+        "summary": "Reset password",
+        "operationId": "ResetPassword",
+        "description": "Write a new password to user, that sending correct token and password",
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "token",
+                  "password"
+                ],
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NzI2MmVjYWI3ZjY4OWFjZGQyMGUxOTUiLCJlbWFpbCI6IjFhZG1pbkB1a3IubmV0IiwiaWF0IjoxNzMxMzMxODYzLCJleHAiOjE3MzEzMzIxNjN9.WvjLlAHXWHUY2GLnyK9SnYvaa-BoY3IODs2o4Qi6Anw"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reset password email has been successfully sent.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Reset password email has been successfully sent."
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          }
+        }
+      }
+    },
     "/users/current": {
       "get": {
         "tags": [
@@ -382,6 +515,89 @@
         }
       }
     },
+    "/water": {
+      "post": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Add Water",
+        "operationId": "addWater",
+        "description": "Create a note about portion of water",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "amount",
+                  "time",
+                  "percentage"
+                ],
+                "properties": {
+                  "amount": {
+                    "description": "Amount of a water portion",
+                    "type": "integer",
+                    "example": 250
+                  },
+                  "time": {
+                    "description": "Time of drinking",
+                    "type": "string",
+                    "example": "2024-11-24T07:00:00"
+                  },
+                  "percentage": {
+                    "description": "Part in daily norm, percentage",
+                    "type": "integer",
+                    "example": 20
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Creates a water",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Water added successfully"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/water"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          }
+        }
+      }
+    },
     "/water/{waterId}": {
       "delete": {
         "tags": [
@@ -506,53 +722,34 @@
         }
       }
     },
-    "/water": {
-      "post": {
+    "/water/day/{date}": {
+      "get": {
         "tags": [
           "Water"
         ],
-        "summary": "Add Water",
-        "operationId": "addWater",
-        "description": "Create a note about portion of water",
+        "summary": "Get data on the drunk water for the day",
+        "operationId": "getWaterPortionsPerDay",
+        "description": "Get data on the drunk water for the day",
         "security": [
           {
             "bearerAuth": []
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "amount",
-                  "time",
-                  "percentage"
-                ],
-                "properties": {
-                  "amount": {
-                    "description": "Amount of a water portion",
-                    "type": "integer",
-                    "example": 250
-                  },
-                  "time": {
-                    "description": "Time of drinking",
-                    "type": "string",
-                    "example": "2024-11-24T07:00:00"
-                  },
-                  "percentage": {
-                    "description": "Part in daily norm, percentage",
-                    "type": "integer",
-                    "example": 20
-                  }
-                }
-              }
+        "parameters": [
+          {
+            "in": "path",
+            "name": "date",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2024-11-04",
+              "pattern": "/^\\d{4}-\\d{2}-\\d{2}$/"
             }
           }
-        },
+        ],
         "responses": {
-          "201": {
-            "description": "Creates a water",
+          "200": {
+            "description": "Water by date found successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -565,15 +762,39 @@
                   "properties": {
                     "status": {
                       "type": "integer",
-                      "example": 201
+                      "example": 200
                     },
                     "message": {
                       "type": "string",
-                      "example": "Water added successfully"
+                      "example": "Water by date 2024-11-04 found successfully!"
                     },
                     "data": {
-                      "type": "object",
-                      "$ref": "#/components/schemas/water"
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "674ead54901308f819537a1f"
+                          },
+                          "amount": {
+                            "type": "integer",
+                            "example": 60
+                          },
+                          "userId": {
+                            "type": "string",
+                            "example": "674171f2b4b44629d5f7d72c"
+                          },
+                          "time": {
+                            "type": "string",
+                            "example": "2024-10-02T17:48:50"
+                          },
+                          "percentage": {
+                            "type": "integer",
+                            "example": 89
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -582,9 +803,79 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
+          }
+        }
+      }
+    },
+    "/water/month/{month}": {
+      "get": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Get data on the drunk water for the month",
+        "operationId": "getDaysPerMonth",
+        "description": "Get data on the drunk water for the month",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "month",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "/^\\d{4}-\\d{2}$/",
+              "example": "2024-11"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Water by month found successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Water by date 2024-11-04 found successfully!"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "day": {
+                            "type": "string",
+                            "example": "2024-11"
+                          },
+                          "percentage": {
+                            "type": "integer",
+                            "example": 89
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           },
-          "404": {
-            "$ref": "#/components/responses/404"
+          "401": {
+            "$ref": "#/components/responses/401"
           }
         }
       }
@@ -617,31 +908,27 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 20,
-            "example": "John Doe",
-            "nullable": true
+            "example": "John Doe"
           },
           "email": {
             "description": "User's email",
             "type": "string",
             "format": "email",
-            "example": "user@mail.com",
-            "nullable": true
+            "example": "user@mail.com"
           },
           "weight": {
             "description": "User's weight in kilograms",
             "type": "number",
             "minimum": 0,
             "maximum": 500,
-            "example": 70,
-            "nullable": true
+            "example": 70
           },
           "activityLevel": {
             "description": "Level of user's activity",
             "type": "number",
             "minimum": 0,
             "maximum": 24,
-            "example": 3,
-            "nullable": true
+            "example": 3
           },
           "gender": {
             "description": "User's gender",
@@ -650,16 +937,14 @@
               "male",
               "female"
             ],
-            "example": "female",
-            "nullable": true
+            "example": "female"
           },
           "dailyRequirement": {
             "description": "User's daily water intake requirement in ml",
             "type": "integer",
             "minimum": 200,
             "maximum": 15000,
-            "example": 1500,
-            "nullable": true
+            "example": 1500
           },
           "photo": {
             "description": "Link to user's photo",
@@ -852,6 +1137,35 @@
                       "example": "User not found"
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": "An unexpected error occurred on the server"
+                },
+                "details": {
+                  "type": "string",
+                  "description": "Additional information about the error",
+                  "example": "Failed to send the email, please try again later"
                 }
               }
             }

@@ -1,17 +1,18 @@
 tags:
   - Water
-summary: Get data for the all drunk portions for a day
-operationId: getWaterDataPerDay
-description: 'Get data for the all drunk portions for a day'
+summary: Get data on the drunk water for the day
+operationId: getWaterPortionsPerDay
+description: 'Get data on the drunk water for the day'
 security:
   - bearerAuth: []
 parameters:
-  - in: query
+  - in: path
     name: date
+    required: true
     schema:
       type: string
-      pattern: '(/^\d{4}-\d{2}-\d{2}$/)'
       example: '2024-11-04'
+      pattern: /^\d{4}-\d{2}-\d{2}$/
 responses:
   '200':
     description: Water by date found successfully
@@ -24,7 +25,7 @@ responses:
             - message
             - data
           properties:
-              status:
+            status:
               type: integer
               example: 200
             message:
@@ -50,6 +51,5 @@ responses:
                   percentage:
                     type: integer
                     example: 89
-
   '401':
-    $ref: '../../../components/responses/401.yaml'
+    $ref: '../../../../components/responses/401.yaml'
