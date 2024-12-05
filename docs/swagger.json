@@ -754,7 +754,7 @@
                   "required": [
                     "status",
                     "message",
-                    "data"
+                    "date"
                   ],
                   "properties": {
                     "status": {
@@ -765,7 +765,7 @@
                       "type": "string",
                       "example": "Water by date 2024-11-04 found successfully!"
                     },
-                    "data": {
+                    "date": {
                       "type": "array",
                       "items": {
                         "type": "object",
@@ -839,7 +839,7 @@
                   "required": [
                     "status",
                     "message",
-                    "data"
+                    "date"
                   ],
                   "properties": {
                     "status": {
@@ -850,14 +850,14 @@
                       "type": "string",
                       "example": "Water by date 2024-11-04 found successfully!"
                     },
-                    "data": {
+                    "date": {
                       "type": "array",
                       "items": {
                         "type": "object",
                         "properties": {
                           "day": {
                             "type": "string",
-                            "example": "2024-11"
+                            "example": "2024-11-04"
                           },
                           "percentage": {
                             "type": "integer",
