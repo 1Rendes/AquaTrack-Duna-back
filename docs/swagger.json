@@ -857,7 +857,7 @@
                         "properties": {
                           "day": {
                             "type": "string",
-                            "example": "2024-11"
+                            "example": "2024-11-04"
                           },
                           "percentage": {
                             "type": "integer",
