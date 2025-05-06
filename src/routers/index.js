@@ -9,5 +9,8 @@ const router = Router();
 router.use('/auth', authRouter);
 router.use('/users', usersRouter);
 router.use('/water', authenticate, waterRouter);
+router.use('/ping', (req, res) => {
+  res.status(200).send('pong');
+});
 
 export default router;
