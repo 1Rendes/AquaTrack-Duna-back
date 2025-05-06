@@ -3,6 +3,8 @@ import {
   logoutUser,
   refreshUserSession,
   registerUser,
+  requestResetToken,
+  resetPassword,
 } from '../services/auth.js';
 import { HTTP_STATUSES } from '../constants/index.js';
 import { setupCookies } from '../utils/setupCookies.js';
@@ -57,5 +59,26 @@ export const refreshUserSessionController = async (req, res) => {
     data: {
       accessToken: session.accessToken,
     },
+  });
+};
+
+export const sendResetEmailController = async (req, res) => {
+  const { email } = req.body;
+  await requestResetToken(email);
+
+  res.json({
+    status: OK,
+    message: `Reset password successfully sent to ${email}`,
+    data: {},
+  });
+};
+
+export const resetPasswordController = async (req, res) => {
+  await resetPassword(req.body);
+
+  res.json({
+    status: OK,
+    message: 'Password successfully changed',
+    data: {},
   });
 };
