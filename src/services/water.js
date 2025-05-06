@@ -26,7 +26,7 @@ export const getDailyWater = (userId, date) => {
   const endOfDay = new Date(date + 'T23:59:59').toISOString();
   return WaterCollection.find({
     userId,
-    time: { $gte: startOfDay.toISOString(), $lte: endOfDay.toISOString() },
+    time: { $gte: startOfDay, $lte: endOfDay },
   });
 };
 

@@ -11,9 +11,6 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
-    },
-    {
       "url": "https://aquatrack-duna-server.onrender.com"
     }
   ],
@@ -860,7 +857,7 @@
                         "properties": {
                           "day": {
                             "type": "string",
-                            "example": "2024-11"
+                            "example": "2024-11-04"
                           },
                           "percentage": {
                             "type": "integer",
